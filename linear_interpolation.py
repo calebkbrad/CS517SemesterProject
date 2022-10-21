@@ -30,10 +30,15 @@ def interpolate(temp1: float, temp2: float, upper_time: float):
 
     return (intercept, slope)
 
+def generate_one_line(temp1: float, temp2: float, upper_time: float, iter: int) -> str:
+    x_difference = 30.0
+    lower_time = upper_time - x_difference
+    intercept, slope = interpolate(temp1, temp2, upper_time)
+    return f"{int(lower_time):>6d} <= x < {int(upper_time):>6d}; y_{int(iter):<7d}= {intercept:>13.4f} + {slope:>10.4f}x; interpolation"
 
 def main(arg):
     intercept, slope = interpolate(0.0, 61.0, 30)
-    print('{0:.8f}'.format(slope))
+    print(generate_one_line(0.0, 61.0, 30, 0))
 
 if __name__ == "__main__":
     main(sys.argv[1:])
