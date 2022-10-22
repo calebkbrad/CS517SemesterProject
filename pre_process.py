@@ -26,8 +26,8 @@ def process_data(valid_input_file: str) -> tuple:
         data for each core
     """
     with open(valid_input_file, 'r') as temps_file:
-            times = [0]
-            core_data = [[0] for _ in range(0, 4)]
+            times = []
+            core_data = [[] for _ in range(0, 4)]
 
             for time, raw_core_data in parse_raw_temps(temps_file):
                 times.append(time)
