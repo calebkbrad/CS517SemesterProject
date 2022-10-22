@@ -81,6 +81,7 @@ def main(arg):
         times, cores_data = process_data(arg[0])
     except:
         print("Please provide a valid input input file")
+        sys.exit(1)
     
     write_all_core_interpolations(times, cores_data)
 
