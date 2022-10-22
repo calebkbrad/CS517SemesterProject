@@ -46,7 +46,7 @@ def generate_one_line(temp1: float, temp2: float, lower_time: float, iter: int) 
     intercept, slope = interpolate(temp1, temp2, lower_time)
     return f"{int(lower_time):>6d} <= x < {int(upper_time):>6d}; y_{int(iter):<7d}= {intercept:>13.4f} + {slope:>10.4f}x; interpolation"
 
-def write_core_interpolation(times: list, temps: list, core_num: int):
+def write_core_interpolation(times: list[int], temps: list[int], core_num: int):
     """
     Write the interpolations of a single core to an output file
 
@@ -63,12 +63,23 @@ def write_core_interpolation(times: list, temps: list, core_num: int):
                 break
             line = generate_one_line(temps[iter], temps[iter+1], time, iter)
             core_output.write(line + '\n')
+
+def write_all_core_interpolations(times: list[int], cores_data: list[list]):
+    """
+    Write the interpolations of every core in an input file
+
+    Args:
+        times (list): List of time increments for each reading
+        cores_data (list): List of lists containing temp readings for each core
+    """
+    for core_num, core_data in enumerate(cores_data):
+        write_core_interpolation(times, core_data, core_num)
     
 
 def main(arg):
-    times, core_data = process_data('Input/temps1.txt')
-    core1_data = core_data[0]
-    write_core_interpolation(times, core1_data, 0)
+    times, cores_data = process_data('Input/temps1.txt')
+    
+    write_all_core_interpolations(times, cores_data)
 
 if __name__ == "__main__":
     main(sys.argv[1:])
