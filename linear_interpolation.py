@@ -84,6 +84,7 @@ def main(arg):
         sys.exit(1)
     
     write_all_core_interpolations(times, cores_data)
+    print('All interpolations completed successfully')
 
 if __name__ == "__main__":
     main(sys.argv[1:])
