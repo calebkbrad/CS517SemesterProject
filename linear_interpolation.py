@@ -77,7 +77,10 @@ def write_all_core_interpolations(times: list[int], cores_data: list[list]):
     
 
 def main(arg):
-    times, cores_data = process_data(arg[0])
+    try:
+        times, cores_data = process_data(arg[0])
+    except:
+        print("Please provide a valid input input file")
     
     write_all_core_interpolations(times, cores_data)
 
