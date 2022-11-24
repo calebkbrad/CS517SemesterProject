@@ -52,7 +52,7 @@ def compute_approximation(times: list[int], temps: list[int]) -> str:
     denom = (n * x_sq_sum) - x_sum ** 2
 
     c0 = ((x_sq_sum * f_sum) - (x_sum * xf_sum)) / denom
-    c1 = ((n * xf_sum) - (x_sum * f_sum))
+    c1 = ((n * xf_sum) - (x_sum * f_sum)) / denom
 
     return (c0, c1)
 
