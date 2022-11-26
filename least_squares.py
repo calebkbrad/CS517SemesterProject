@@ -78,12 +78,8 @@ def generate_approximation_line(times: list[int], temps: list[int]):
 
 def main(argv):
     times, cores_data = process_data(argv[0])
-    # x_sum, x_sq_sum, f_sum, xf_sum = compute_sums(times, cores_data[0])
-    # print(x_sum)
-    # print(x_sq_sum)
-    # print(f_sum)
-    # print(xf_sum)
-    print(generate_approximation_line(times, cores_data[0]))
+    for core in cores_data:
+        print(generate_approximation_line(times, core))
 
 if __name__ == "__main__":
     main(sys.argv[1:])
