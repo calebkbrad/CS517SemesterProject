@@ -37,7 +37,7 @@ def compute_sums(times: list[int], temps: list[int]) -> tuple:
     
     return (x_sum, x_sq_sum, f_sum, xf_sum)
 
-def compute_approximation(times: list[int], temps: list[int]) -> str:
+def compute_approximation(times: list[int], temps: list[int]) -> tuple:
     """
     Compute the least squares approximation using the equations for C0 and C1 derived during lecture
 
@@ -45,7 +45,8 @@ def compute_approximation(times: list[int], temps: list[int]) -> str:
         times (list): List of all time (x) values    
         temps (list): List of all corresponding temp (f(x)) values
 
-
+    Returns:
+        Tuple containing C0 and C1 values
     """
     x_sum, x_sq_sum, f_sum, xf_sum = compute_sums(times, temps)
     n = len(times)
@@ -56,6 +57,25 @@ def compute_approximation(times: list[int], temps: list[int]) -> str:
 
     return (c0, c1)
 
+def generate_approximation_line(times: list[int], temps: list[int]):
+    """
+    Generates a line of least squares approximation for one core
+
+    Args:
+        times (list): List of all time (x) values    
+        temps (list): List of all corresponding temp (f(x)) values
+
+    Returns:
+        Properly formatted line of data representing the equation of the line calculated through least squares approximation
+    """
+    lower_time = times[0]
+    upper_time = times[-1]
+
+    c0, c1 = compute_approximation(times, temps)
+
+    return f"{lower_time:>6d} <= x < {upper_time:>6d}; y_{0:<7d}= {c0:>13.4f} + {c1:>10.4f}x; least squares approximation"
+
+
 def main(argv):
     times, cores_data = process_data(argv[0])
     # x_sum, x_sq_sum, f_sum, xf_sum = compute_sums(times, cores_data[0])
@@ -63,9 +83,7 @@ def main(argv):
     # print(x_sq_sum)
     # print(f_sum)
     # print(xf_sum)
-    c0, c1 = compute_approximation(times, cores_data[0])
-    print(c0)
-    print(c1)
+    print(generate_approximation_line(times, cores_data[0]))
 
 if __name__ == "__main__":
     main(sys.argv[1:])
