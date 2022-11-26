@@ -77,7 +77,11 @@ def generate_approximation_line(times: list[int], temps: list[int]):
 
 
 def main(argv):
-    times, cores_data = process_data(argv[0])
+    try:
+        times, cores_data = process_data(argv[0])
+    except:
+        print("Please provide a valid input input file")
+        sys.exit(1)
     for core in cores_data:
         print(generate_approximation_line(times, core))
 
