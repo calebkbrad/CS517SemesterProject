@@ -40,7 +40,7 @@ def write_all_core_computations(times: list[int], cores_data: list[list[int]]):
         cores_data (list): List of lists containing temp readings for each core
     """
     for core_num, core_data in enumerate(cores_data):
-        write_all_core_computations(times, core_data, core_num)
+        write_core_computations(times, core_data, core_num)
 
 def main(argv):
     try:
